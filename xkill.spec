@@ -4,7 +4,7 @@
 #
 Name     : xkill
 Version  : 1.0.5
-Release  : 1
+Release  : 2
 URL      : https://www.x.org/releases/individual/app/xkill-1.0.5.tar.gz
 Source0  : https://www.x.org/releases/individual/app/xkill-1.0.5.tar.gz
 Summary  : No detailed summary available
