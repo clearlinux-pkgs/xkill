@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xCFDF148828C642A7 (alanc@freedesktop.org)
 #
 Name     : xkill
-Version  : 1.0.5
-Release  : 3
-URL      : https://www.x.org/releases/individual/app/xkill-1.0.5.tar.gz
-Source0  : https://www.x.org/releases/individual/app/xkill-1.0.5.tar.gz
-Source1  : https://www.x.org/releases/individual/app/xkill-1.0.5.tar.gz.sig
+Version  : 1.0.6
+Release  : 4
+URL      : https://www.x.org/releases/individual/app/xkill-1.0.6.tar.gz
+Source0  : https://www.x.org/releases/individual/app/xkill-1.0.6.tar.gz
+Source1  : https://www.x.org/releases/individual/app/xkill-1.0.6.tar.gz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : MIT-Opengroup
@@ -52,20 +52,23 @@ man components for the xkill package.
 
 
 %prep
-%setup -q -n xkill-1.0.5
-cd %{_builddir}/xkill-1.0.5
+%setup -q -n xkill-1.0.6
+cd %{_builddir}/xkill-1.0.6
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1604598947
+export SOURCE_DATE_EPOCH=1668450837
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$FFLAGS -fno-lto "
-export FFLAGS="$FFLAGS -fno-lto "
-export CXXFLAGS="$CXXFLAGS -fno-lto "
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -77,10 +80,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1604598947
+export SOURCE_DATE_EPOCH=1668450837
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/xkill
-cp %{_builddir}/xkill-1.0.5/COPYING %{buildroot}/usr/share/package-licenses/xkill/8dd1a5611e7e942c1cb89e33c1f4667e60b5314f
+cp %{_builddir}/xkill-%{version}/COPYING %{buildroot}/usr/share/package-licenses/xkill/8dd1a5611e7e942c1cb89e33c1f4667e60b5314f
 %make_install
 
 %files
